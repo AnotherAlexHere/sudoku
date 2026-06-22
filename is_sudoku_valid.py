@@ -89,7 +89,4 @@ if __name__ == "__main__":
         [9," "," "," "," "," "," "," "," "],
     ]
 
-    #print(no_invalid_char(sudoku_correct))
-    #print(is_row_correct([1,2," ",4,5,6,7," ",9]))
-    #print(is_square_correct(sudoku_wrong, 0, 0))
-    #print(is_sudoku_valid(sudoku_correct))
+
