@@ -3,7 +3,6 @@ def no_invalid_char(sudoku) -> bool:
     for row in sudoku:
         for cell in row:
             if cell not in valid_char:
-                print(f"'{cell}' is not a valid character in this sudoku grid")
                 return False
 
     return True
@@ -40,6 +39,27 @@ def is_square_correct(sudoku: list, row_index: int, column_index: int):
     
     return is_row_correct(square_list)
 
+def is_sudoku_valid(sudoku: list):
+    """
+    Calls all check functions to make sure that the sudoku is valid.
+    """
+    if not no_invalid_char(sudoku):
+        return False
+    
+    for row in sudoku:
+        if not is_row_correct(row):
+            return False
+    
+    for column in range(9):
+        if not is_column_correct(sudoku, column):
+            return False
+        
+    for i in [0,3,6]:
+        for j in [0,3,6]:
+            if not is_square_correct(sudoku, i, j):
+                return False
+
+    return True
 
 
 
@@ -71,7 +91,5 @@ if __name__ == "__main__":
 
     #print(no_invalid_char(sudoku_correct))
     #print(is_row_correct([1,2," ",4,5,6,7," ",9]))
-    print(is_square_correct(sudoku_wrong, 0, 0))
-
-
-
+    #print(is_square_correct(sudoku_wrong, 0, 0))
+    #print(is_sudoku_valid(sudoku_correct))
