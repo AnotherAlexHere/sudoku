@@ -30,11 +30,16 @@ def simple_sudoku():
     while True:
         print_sudoku(sudoku)
         user_input = ask_for_input()
+        if user_input == "quit":
+            print("You chose to quit.")
+            break
+
         add_entry(sudoku, int(user_input[0]), int(user_input[1]), int(user_input[2]))
 
         if sudoku_complete(sudoku):
             print_sudoku(sudoku)
             break
 
+    
 
 simple_sudoku()

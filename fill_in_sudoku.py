@@ -11,8 +11,11 @@ def ask_for_input():
             row = int(input("Please enter the row:"))
             column = int(input("Please enter the column:"))
         except:
-            print("Enter a valid input.")
-            continue
+            retry_or_quite = input("Enter a valid input or if you would like to quit, type quit:")
+            if retry_or_quite == "quit":
+                return "quit"
+            else:
+                continue
 
         if entry in range(1,10) and row in range(9) and column in range(9):
             break
