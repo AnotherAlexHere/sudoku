@@ -20,6 +20,12 @@ def replace_entry(sudoku: list, entry: int, row: int, column):
     sudoku[row][column] = entry
     return sudoku
 
+def sudoku_not_complete(sudoku: list):
+    for row in sudoku:
+        if " " in row:
+            return True
+        
+    return False
 
 
 if __name__ == "__main__":
