@@ -53,7 +53,7 @@ def test_replace_entry():
     ]
     assert replace_entry(sudoku, 9, 2, 3) == sudoku_new, "replaced entry should be 9 at row 2 and column 3"
 
-def test_sudoku_not_complete():
+def test_sudoku_complete():
     sudoku = [
         [" "," "," "," "," "," "," "," "," "],
         [" "," "," "," "," "," "," "," "," "],
@@ -66,7 +66,7 @@ def test_sudoku_not_complete():
         [" "," "," "," "," "," "," "," "," "],
     ]
 
-    sudoku_complete = [
+    sudoku_is_complete = [
         [4,3,5,2,6,9,7,8,1],
         [6,8,2,5,7,1,4,9,3],
         [1,9,7,8,3,4,5,6,2],
@@ -79,6 +79,6 @@ def test_sudoku_not_complete():
     ]
 
 
-    assert sudoku_not_complete(sudoku) == True
-    assert sudoku_not_complete(sudoku_complete) == False
+    assert sudoku_complete(sudoku) == False, "sudoku is not complete"
+    assert sudoku_complete(sudoku_is_complete) == True, "sudoku is complete"
 
