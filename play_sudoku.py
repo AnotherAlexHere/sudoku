@@ -2,7 +2,6 @@ from displaying_sudoku import *
 from fill_in_sudoku import *
 from is_sudoku_valid import *
 
-
 def simple_sudoku():
     sudoku = [
         [" "," "," ",2,6," ",7," ",1],
@@ -27,17 +26,11 @@ def simple_sudoku():
         [2,4,8,9,5,7,1,3,6],
         [7,6,3,4,1,8,2,5,9]
     ]
+
     while True:
         print_sudoku(sudoku)
-        user_input = input("Either enter break to stop the loop or enter the number \n you would like to input and the location in the format: number, row, column):")
-        
-        if user_input == "break":
-            break
-
-        user_input = user_input.split(", ")
-
+        user_input = ask_for_input()
         add_entry(sudoku, int(user_input[0]), int(user_input[1]), int(user_input[2]))
-
 
         if sudoku_complete(sudoku):
             print_sudoku(sudoku)
