@@ -3,7 +3,7 @@ from displaying_sudoku import print_sudoku
 def add_entry(sudoku:list, entry: int, row: int, column: int):
     """
     Enters the number in the desired location of the sudoku as 
-    long as hat location is empty. Does not discriminate/check 
+    long as that location is empty. Does not discriminate/check 
     whether the addition produces a valid sudoku.
 
     """
@@ -11,6 +11,15 @@ def add_entry(sudoku:list, entry: int, row: int, column: int):
         sudoku[row][column] = entry
 
     return sudoku
+
+def replace_entry(sudoku: list, entry: int, row: int, column):
+    """
+    Enters the number in the desired location of the sudoku. 
+    Does not discriminate/check whether the addition produces a valid sudoku.
+    """
+    sudoku[row][column] = entry
+    return sudoku
+
 
 
 if __name__ == "__main__":
