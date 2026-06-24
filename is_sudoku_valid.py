@@ -8,6 +8,9 @@ def no_invalid_char(sudoku) -> bool:
     return True
 
 def is_row_correct(row: list):
+    """
+    Checks if there are any repeated entries in row, invalidating it.
+    """
     numbers = [1,2,3,4,5,6,7,8,9]
     for number in numbers:
         occurance_of_number = row.count(number)
@@ -16,6 +19,12 @@ def is_row_correct(row: list):
     return True
 
 def is_column_correct(sudoku: list, column_index: int):
+    """
+    Checks if there are any repeated entries in column, invalidating it. 
+    (It is isolated to one column incase I want to create another 
+    function which only checks if an entry invalidates a sudoku. 
+    In this way I would only be checking one row, one column and one square.)
+    """
     column = []
     for row in sudoku:
         column.append(row[column_index])

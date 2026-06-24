@@ -47,12 +47,14 @@ def replace_entry(sudoku: list, entry: int, row: int, column):
     return sudoku
 
 def sudoku_complete(sudoku):
+    """
+    Checks if sudoku is complete (all entries are filled)
+    """
     for row in sudoku:
         if " " in row:
             return False
         
     return True
-
 
 if __name__ == "__main__":
     # sudoku = [
