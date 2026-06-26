@@ -3,6 +3,10 @@ from fill_in_sudoku import *
 from is_sudoku_valid import *
 
 def simple_sudoku():
+    """
+    Plays sudoku game in terminal. Does not check for correctness, or validity. Game is complete when all squares have been filled.
+    """
+
     # sudoku = [
     #     [" "," "," ",2,6," ",7," ",1],
     #     [6,8," "," ",7," "," ",9," "],
@@ -47,7 +51,13 @@ def simple_sudoku():
             print("You chose to quit.")
             break
 
-        add_entry(sudoku, int(user_input[0]), int(user_input[1]), int(user_input[2]))
+        if is_entry_filled(sudoku, user_input[1], user_input[2]):
+            decision = input("You have entered a square that already has an entry, if you would like to replace the entry in that square, type yes.")
+            if decision == "yes":
+                replace_entry(sudoku, user_input[0], user_input[1], user_input[2])
+        elif not is_entry_filled(sudoku, user_input[1], user_input[2]):
+            add_entry(sudoku, user_input[0], user_input[1], user_input[2])
+
 
         if sudoku_complete(sudoku):
             print_sudoku(sudoku)

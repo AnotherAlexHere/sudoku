@@ -4,6 +4,7 @@ def ask_for_input():
     """
     Asks user for input, if user provides inputs that are not 
     within the appropriate ranges, it prompts the user to re-enter.
+    output = (entry, row, column).
     """
     while True:
         try:
@@ -38,6 +39,15 @@ def add_entry(sudoku:list, entry: int, row: int, column: int):
 
     return sudoku
 
+def is_entry_filled(sudoku: list, row: int, column: int):
+    """
+    Returns true if there is already a number in the spot, false if there isn't.
+    """
+    if sudoku[row][column] == " ":
+        return False
+    elif sudoku[row][column] != " ":
+        return True
+
 def replace_entry(sudoku: list, entry: int, row: int, column):
     """
     Enters the number in the desired location of the sudoku. 
@@ -48,7 +58,7 @@ def replace_entry(sudoku: list, entry: int, row: int, column):
 
 def sudoku_complete(sudoku):
     """
-    Checks if sudoku is complete (all entries are filled)
+    Checks if sudoku is complete (all entries are filled). Does NOT check if it is correct.
     """
     for row in sudoku:
         if " " in row:
