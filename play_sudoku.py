@@ -2,7 +2,7 @@ from displaying_sudoku import *
 from fill_in_sudoku import *
 from is_sudoku_valid import *
 
-def simple_sudoku():
+def level_one_sudoku_game():
     """
     Plays sudoku game in terminal. Does not check for correctness, or validity. Game is complete when all squares have been filled.
     """
@@ -44,12 +44,18 @@ def simple_sudoku():
         [7,6,3,4,1,8,2,5,9]
     ]
 
+    originally_filled_squares = get_filled_in_squares(sudoku)
+
     while True:
         print_sudoku(sudoku)
         user_input = ask_for_input()
         if user_input == "quit":
             print("You chose to quit.")
             break
+
+        if (user_input[1],user_input[2]) in originally_filled_squares:
+            print("This square was part of the original sudoku and cannot be changed. Try again.")
+            continue
 
         if is_entry_filled(sudoku, user_input[1], user_input[2]):
             decision = input("You have entered a square that already has an entry, if you would like to replace the entry in that square, type yes.")
@@ -58,12 +64,9 @@ def simple_sudoku():
         elif not is_entry_filled(sudoku, user_input[1], user_input[2]):
             add_entry(sudoku, user_input[0], user_input[1], user_input[2])
 
-
         if sudoku_complete(sudoku):
             print_sudoku(sudoku)
             print("Congrats! You have completed the sudoku!")
             break
 
-    
-
-simple_sudoku()
+level_one_sudoku_game()
