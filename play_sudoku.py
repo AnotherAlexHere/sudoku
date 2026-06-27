@@ -2,34 +2,34 @@ from displaying_sudoku import *
 from fill_in_sudoku import *
 from is_sudoku_valid import *
 
-def level_one_sudoku_game():
+def sudoku_game():
     """
-    Plays sudoku game in terminal. Does not check for correctness, or validity. Game is complete when all squares have been filled.
+    Plays sudoku game in terminal. Game is complete when all squares have been filled and are valid. Does not allow the user to enter wrong entries.
     """
-
-    # sudoku = [
-    #     [" "," "," ",2,6," ",7," ",1],
-    #     [6,8," "," ",7," "," ",9," "],
-    #     [1,9," "," "," ",4,5," "," "],
-    #     [8,2," ",1," "," "," ",4," "],
-    #     [" "," ",4,6," ",2,9," "," "],
-    #     [" ",5," "," "," ",3," ",2,8],
-    #     [" "," ",9,3," "," "," ",7,4],
-    #     [" ",4," "," ",5," "," ",3,6],
-    #     [7," ",3," ",1,8," "," "," "]
-    # ]
 
     sudoku = [
-        [" ",3,5,2,6,9,7,8,1],
-        [6,8,2,5,7,1,4,9,3],
-        [1,9,7,8,3,4,5,6,2],
-        [8,2,6,1,9,5,3,4,7],
-        [3,7,4,6,8,2,9,1,5],
-        [9,5,1,7,4,3,6,2,8],
-        [5,1,9,3,2,6,8,7,4],
-        [2,4,8,9,5,7,1,3,6],
-        [7,6,3,4,1,8,2,5,9]
+        [" "," "," ",2,6," ",7," ",1],
+        [6,8," "," ",7," "," ",9," "],
+        [1,9," "," "," ",4,5," "," "],
+        [8,2," ",1," "," "," ",4," "],
+        [" "," ",4,6," ",2,9," "," "],
+        [" ",5," "," "," ",3," ",2,8],
+        [" "," ",9,3," "," "," ",7,4],
+        [" ",4," "," ",5," "," ",3,6],
+        [7," ",3," ",1,8," "," "," "]
     ]
+
+    # sudoku = [
+    #     [" ",3,5,2,6,9,7,8,1],
+    #     [6,8,2,5,7,1,4,9,3],
+    #     [1,9,7,8,3,4,5,6,2],
+    #     [8,2,6,1,9,5,3,4,7],
+    #     [3,7,4,6,8,2,9,1,5],
+    #     [9,5,1,7,4,3,6,2,8],
+    #     [5,1,9,3,2,6,8,7,4],
+    #     [2,4,8,9,5,7,1,3,6],
+    #     [7,6,3,4,1,8,2,5,9]
+    # ]
 
 
     completed_sudoku = [
@@ -63,10 +63,13 @@ def level_one_sudoku_game():
                 replace_entry(sudoku, user_input[0], user_input[1], user_input[2])
         elif not is_entry_filled(sudoku, user_input[1], user_input[2]):
             add_entry(sudoku, user_input[0], user_input[1], user_input[2])
+            if not compare_current_complete(sudoku, completed_sudoku):
+                print("Are you sure about that entry? That does not seem to be correct.")
+                remove_entry(sudoku, user_input[1], user_input[2])
 
-        if sudoku_complete(sudoku):
+        if sudoku_complete(sudoku) and compare_current_complete(sudoku,completed_sudoku):
             print_sudoku(sudoku)
             print("Congrats! You have completed the sudoku!")
             break
 
-level_one_sudoku_game()
+sudoku_game()
