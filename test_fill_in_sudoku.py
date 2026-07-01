@@ -1,6 +1,6 @@
 from fill_in_sudoku import *
 
-def test_add_empty_sudoku():
+def test_add_entry():
     sudoku = [
         [" "," "," "," "," "," "," "," "," "],
         [" "," "," "," "," "," "," "," "," "],
@@ -24,8 +24,52 @@ def test_add_empty_sudoku():
         [" "," "," "," "," "," "," "," "," "],
         [" "," "," "," "," "," "," "," "," "],
     ]
-    assert add_entry(sudoku, 9, 2, 3) == sudoku_new, "added entry should be 9 at row 2 and column 3"
 
+    assert add_entry(sudoku, 9, 2, 3) == sudoku_new, "Added entry should be 9 at row 2 and column 3"
+    assert add_entry(sudoku_new, 6, 2, 3) == sudoku_new, "If entry is non empty (must be a space signifing so ' ') to begin with, then add_entry should not change the entry."
+
+def test_remove_entry():
+    sudoku = [
+        [" "," "," "," "," "," "," "," "," "],
+        [" "," "," "," "," "," "," "," "," "],
+        [" "," "," ",9," "," "," "," "," "],
+        [" "," "," "," "," "," "," "," "," "],
+        [" "," "," "," "," "," "," "," "," "],
+        [" "," "," "," "," "," "," "," "," "],
+        [" "," "," "," "," "," "," "," "," "],
+        [" "," "," "," "," "," "," "," "," "],
+        [" "," "," "," "," "," "," "," "," "],
+    ]
+
+    sudoku_new = [
+        [" "," "," "," "," "," "," "," "," "],
+        [" "," "," "," "," "," "," "," "," "],
+        [" "," "," "," "," "," "," "," "," "],
+        [" "," "," "," "," "," "," "," "," "],
+        [" "," "," "," "," "," "," "," "," "],
+        [" "," "," "," "," "," "," "," "," "],
+        [" "," "," "," "," "," "," "," "," "],
+        [" "," "," "," "," "," "," "," "," "],
+        [" "," "," "," "," "," "," "," "," "],
+    ]
+
+    assert remove_entry(sudoku, 2, 3) == sudoku_new
+
+def test_is_entry_filled():
+    sudoku = [
+        [" "," "," "," "," "," "," "," "," "],
+        [" "," "," "," "," "," "," "," "," "],
+        [" "," "," ",9," "," "," "," "," "],
+        [" "," "," "," "," "," "," "," "," "],
+        [" "," "," "," "," "," "," "," "," "],
+        [" "," "," "," "," "," "," "," "," "],
+        [" "," "," "," "," "," "," "," "," "],
+        [" "," "," "," "," "," "," "," "," "],
+        [" "," "," "," "," "," "," "," "," "],
+    ]
+
+    assert is_entry_filled(sudoku, 2, 3) == True, "There is an entry at those coordinates so it returns True"
+    assert is_entry_filled(sudoku, 8, 8) == False, "This is an empty space so should return False."
 
 def test_replace_entry():
     sudoku = [
@@ -82,3 +126,43 @@ def test_sudoku_complete():
     assert sudoku_complete(sudoku) == False, "sudoku is not complete"
     assert sudoku_complete(sudoku_is_complete) == True, "sudoku is complete"
 
+def test_get_filled_in_squares():
+    sudoku_one = [
+        [" "," "," "," "," "," "," "," "," "],
+        [" "," "," "," "," "," "," "," "," "],
+        [" "," "," "," "," "," "," "," "," "],
+        [" "," "," "," "," "," "," "," "," "],
+        [" "," "," "," "," "," "," "," "," "],
+        [" "," "," "," "," "," "," "," "," "],
+        [" "," "," "," "," "," "," "," "," "],
+        [" "," "," "," "," "," "," "," "," "],
+        [" "," "," "," "," "," "," "," "," "],
+    ]
+
+    sudoku_two = [
+        [4," "," "," "," "," "," "," "," "],
+        [" "," "," "," "," "," "," "," "," "],
+        [" "," "," ",9," "," "," "," "," "],
+        [" "," "," "," "," "," "," "," "," "],
+        [1," "," "," "," "," "," "," "," "],
+        [" "," "," "," "," "," ",8," "," "],
+        [" "," "," "," "," "," "," "," "," "],
+        [" "," "," "," "," "," "," "," "," "],
+        [" "," "," "," "," "," "," "," "," "],
+    ]
+
+    sudoku_three = [
+        [" "," "," "," "," "," "," "," "," "],
+        [" ","a"," "," "," "," "," "," "," "],
+        [" "," "," ",9," "," "," "," "," "],
+        [" "," "," "," "," "," "," "," "," "],
+        [" "," "," "," "," "," "," "," "," "],
+        [" "," "," "," "," "," "," "," "," "],
+        [" "," "," "," "," ","b"," "," "," "],
+        [" "," "," "," "," "," "," "," "," "],
+        [" "," "," "," "," "," "," "," "," "],
+    ]
+
+    assert get_filled_in_squares(sudoku_one) == [], "This sudoku grid is completely empty so the list is empty."
+    assert get_filled_in_squares(sudoku_two) == [(0,0),(2,3),(4,0),(5,6)], "These are the non-empty entries in the grid."
+    assert get_filled_in_squares(sudoku_three) == [(1,1),(2,3),(6,5)], "Even though these entries are not technically valid, they should still register as non-empty."
